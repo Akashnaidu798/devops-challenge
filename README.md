@@ -1,5 +1,7 @@
 Infrastructure Coding Test
 
+**###Mandatory Task###**
+
 **Steps required to create the server**
 
 **Using Terraform**
@@ -56,3 +58,17 @@ _http://ipaddress/version.txt_
 Use statusChecker.sh(added in the repo)script to check the status of application which also runs on cron(every 1 minute) and posts the status in a file status.txt
 
 
+**### Extra credits ###**
+
+1) We can bootstrap the server creation using terraform by applying ec2-create.tf file (instructions are given above)
+2) A new Target group is created with two ec2-instances attached both listening on same port 80 but having different version to differentiate servers and the same target group is attached to a load balancer
+
+Load balancer URL: http://nginxversioncheck-409897852.us-east-2.elb.amazonaws.com/version.txt
+
+3) Nginx is running inside docker container in both the instances and port forwarded to port 80 of host machine
+    Steps for docker container:
+    
+    * Install docker using the command "yum install docker -y"
+    * Start docker daemon using the command "systemctl start docker"
+    * create a new docker container with nginx image using the command "docker run -d -p 80:80 nginx" (port forwarded to port 80 of host)
+    * copy version.txt file from host machine to docker container using the command "docker cp /usr/share/nginx/html/version.txt abf0316762a3:/usr/share/nginx/html/version.txt"
