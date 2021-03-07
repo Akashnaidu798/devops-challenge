@@ -14,6 +14,14 @@ sudo yum -y install terraform
 
 once installed copy the file ec2-create.tf in a directory and execute below command to initialize terraform
 
+Create IAM user with programmatic access and attach ec2 full access policy and copy Access key id and secret key
+
+use below command to provide AWS credentials in the server.
+
+_"aws configure"_ 
+
+and provide access key id , secret key and default region
+
 _"terraform init"_
 
 then plan and apply the terraform config use below commands
